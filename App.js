@@ -1,29 +1,29 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow
- */
+import React, { Component } from 'react'
+import { StyleSheet, Text, View, TouchableOpacity } from 'react-native'
+import { ProgressCircle } from 'react-native-svg-charts'
 
-import React, {Component} from 'react';
-import {Platform, StyleSheet, Text, View} from 'react-native';
+export default class App extends Component {
+  state = {
+    progress: 0.5
+  }
 
-const instructions = Platform.select({
-  ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
-  android:
-    'Double tap R on your keyboard to reload,\n' +
-    'Shake or press menu button for dev menu',
-});
+  onPressButton = () => {
+    this.setState({ progress: Math.random() })
+  }
 
-type Props = {};
-export default class App extends Component<Props> {
   render() {
+    const { progress } = this.state
     return (
       <View style={styles.container}>
-        <Text style={styles.welcome}>Welcome to React Native!</Text>
-        <Text style={styles.instructions}>To get started, edit App.js</Text>
-        <Text style={styles.instructions}>{instructions}</Text>
+        <ProgressCircle
+          style={styles.progressCircle}
+          progress={progress}
+          progressColor="#FF0055"
+        />
+        <Text>Progress: {progress}</Text>
+        <TouchableOpacity onPress={this.onPressButton}>
+          <Text>Randomize progress</Text>
+        </TouchableOpacity>
       </View>
     );
   }
@@ -36,14 +36,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
   },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
+  progressCircle: {
+    height: 222,
+    width: 222,
+  }
 });

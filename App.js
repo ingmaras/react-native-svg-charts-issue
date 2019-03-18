@@ -1,28 +1,34 @@
 import React, { Component } from 'react'
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native'
-import { ProgressCircle } from 'react-native-svg-charts'
+import { Svg, Path, G } from 'react-native-svg'
 
 export default class App extends Component {
   state = {
-    progress: 0.5
+    toggle: false
   }
 
   onPressButton = () => {
-    this.setState({ progress: Math.random() })
+    this.setState({ toggle: !this.state.toggle })
   }
 
   render() {
-    const { progress } = this.state
+    const { toggle } = this.state
     return (
       <View style={styles.container}>
-        <ProgressCircle
-          style={styles.progressCircle}
-          progress={progress}
-          progressColor="#FF0055"
-        />
-        <Text>Progress: {progress}</Text>
+        <Svg style={{ height: 222, width: 222 }}>
+          <G>
+            <Path d={toggle ? 'M25 10 L98 65 L70 25 L16 77' : 'M25 10 L98 65'} fill="none" stroke="red" strokeWidth={5} />
+          </G>
+        </Svg>
+
+
+        <Svg style={{ height: 222, width: 222 }}>
+          <Path d={toggle ? 'M25 10 L98 65 L70 25 L16 77' : 'M25 10 L98 65'} fill="none" stroke="red" strokeWidth={5} />
+        </Svg>
+
+        <Text>Toggled: {toggle ? 'YES' : 'NO'}</Text>
         <TouchableOpacity onPress={this.onPressButton}>
-          <Text>Randomize progress</Text>
+          <Text>Toggle</Text>
         </TouchableOpacity>
       </View>
     );
@@ -36,7 +42,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
   },
-  progressCircle: {
+  svg: {
     height: 222,
     width: 222,
   }

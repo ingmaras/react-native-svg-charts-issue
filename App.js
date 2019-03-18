@@ -15,12 +15,14 @@ export default class App extends Component {
     const { toggle } = this.state
     return (
       <View style={styles.container}>
+        <Text>With G</Text>
         <Svg style={styles.svg}>
           <G>
             <Path d={toggle ? 'M25 10 L98 65 L70 25 L16 77' : 'M25 10 L98 65'} fill="none" stroke="red" strokeWidth={5} />
           </G>
         </Svg>
 
+        <Text>Without G</Text>
         <Svg style={styles.svg}>
           <Path d={toggle ? 'M25 10 L98 65 L70 25 L16 77' : 'M25 10 L98 65'} fill="none" stroke="red" strokeWidth={5} />
         </Svg>
